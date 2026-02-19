@@ -1,4 +1,4 @@
-# Project Title
+# My AI Chatbot
 
 Simple overview of use/purpose.
 
@@ -35,7 +35,7 @@ command to run if program contains helper info
 
 ## Authors
 
-Contributors names and contact info
+[tddtf](https://github.com/tddtf) on Github
 
 ex. Mr Jones
 ex. [@benpaddlejones](https://github.com/benpaddlejones)
@@ -50,7 +50,7 @@ ex. [@benpaddlejones](https://github.com/benpaddlejones)
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+This project is licensed under the GNU GPL v3.0 License - see the LICENSE.md file for details
 
 ## Acknowledgments
 
