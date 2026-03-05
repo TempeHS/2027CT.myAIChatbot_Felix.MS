@@ -23,23 +23,24 @@ def home():
     return render_template("index.html")
 
 
-@app.route('/chat', methods=['POST'])
+@app.route("/chat", methods=["POST"])
 def chat():
     data = request.get_json()
-    user_message = data.get('message', '')
-    
+    user_message = data.get("message", "")
+
+    # Basic input validation
     if not user_message:
-        return jsonify({'response': 'Please enter a message!'})
-    
+        return jsonify({"response": "Please enter a message!"})
+
     if len(user_message) > 500:
-        return jsonify({'response': 'Message too long!'})
-    
-    # Safety check for crisis keywords
-    if check_for_crisis(user_message):
-        return jsonify({'response': CRISIS_RESPONSE})
-    
+        return jsonify(
+            {"response": "Message too long! Please keep it under 500 characters."}
+        )
+
+    # Get the chatbot's response
     bot_response = chatbot.get_response(user_message)
-    return jsonify({'response': str(bot_response)})
+
+    return jsonify({"response": str(bot_response)})
 
 
 if __name__ == "__main__":
@@ -47,17 +48,26 @@ if __name__ == "__main__":
 
 # Safety: Keywords that should trigger a mental health response
 CRISIS_KEYWORDS = [
-    'suicide', 'kill myself', 'end my life', 'self harm', 'self-harm',
-    'dont want to live', "don't want to live", 'want to die'
+    "suicide",
+    "kill myself",
+    "end my life",
+    "self harm",
+    "self-harm",
+    "dont want to live",
+    "don't want to live",
+    "want to die",
 ]
 
-CRISIS_RESPONSE = """I'm just an AI chatbot, and cannot respond appropriately or provide help for topics like self harm or depression. For mental health support, please talk to someone you can trust. Alternatively, you can contact these services for support.
+CRISIS_RESPONSE = """I'm concerned about what you've shared. Please know that you're not alone.
+
+If you're in crisis, please reach out for support:
 
 - Lifeline: 13 11 14 (24/7)
 - Kids Helpline: 1800 55 1800
 - Beyond Blue: 1300 22 4636
 
 I'm just a chatbot and can't provide the support you need, but these services have trained counselors ready to help right now."""
+
 
 def check_for_crisis(message):
     """Check if message contains crisis keywords."""
